@@ -1,5 +1,6 @@
 ---
-
+import { db, User } from "astro:db";
+const users = await db.select().from(User);
 ---
 
 <html lang="en">
