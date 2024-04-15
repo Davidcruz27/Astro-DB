@@ -1,0 +1,25 @@
+---
+import { db, Category } from "astro:db";
+
+if (Astro.request.method === "POST") {
+	//CREAR TODO
+	const formData = await Astro.request.formData();
+	const title = formData.get("title");
+	const description = formData.get("description");
+	const category_id = formData.get("category_id");
+	if (
+		typeof title === "string" &&
+		typeof description === "string" &&
+		typeof category_id === "string"
+	) {
+		await db.insert(Todo).values({
+			title,
+			description,
+			category_id,
+			user_id: "dus12",
+		});
+	}
+}
+
+const categories = await db.select().from(Category);
+---
